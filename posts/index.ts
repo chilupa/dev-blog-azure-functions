@@ -18,6 +18,10 @@ const typeDefs = gql`
     author: String
   }
 
+  input DeletePostInput{
+    id: ID!
+  }
+
   type Post {
     id: ID!
     title: String
@@ -34,7 +38,7 @@ const typeDefs = gql`
   type Mutation {
     createPost(input: PostInput): Post
     updatePost(id: ID!, input: PostInput): Post
-    deletePost(id: ID!): Post
+    deletePost(input: DeletePostInput): Post
   }
 `;
 
@@ -69,11 +73,14 @@ const resolvers = {
       database[id] = input;
       return new Post(id, input);
     },
-    deletePost: (_, { id }) => {
+    deletePost: (_, { input }) => {
+
+      const { id } = input
       if (!database[id]) {
         throw new Error("no Post exists with id " + id);
       }
       delete database[id];
+      return 'Delete successful'
     },
   },
   Query: {

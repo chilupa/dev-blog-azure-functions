@@ -1,8 +1,9 @@
 {
-    "azureFunctions.deploySubpath": ".",
-    "azureFunctions.postDeployTask": "npm install (functions)",
-    "azureFunctions.projectLanguage": "TypeScript",
-    "azureFunctions.projectRuntime": "~3",
-    "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "npm prune (functions)"
+  "azureFunctions.deploySubpath": ".",
+  "azureFunctions.postDeployTask": "npm install (functions)",
+  "azureFunctions.projectLanguage": "TypeScript",
+  "azureFunctions.projectRuntime": "~3",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "npm prune (functions)",
+  "azure.tenant": "37c3fbc4-8328-45fa-b80a-a3c64144bc4c"
 }
