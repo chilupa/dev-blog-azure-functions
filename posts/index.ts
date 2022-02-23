@@ -5,7 +5,7 @@ const database = {
   [uuid()]: {
     title: "Hooks in React",
     description: "Development made easy with hooks",
-    createdAt: "Feb 17",
+    createdAt: "Feb 17, 2022",
     author: "John Snow",
   },
 };
@@ -74,7 +74,6 @@ const resolvers = {
       return new Post(id, input);
     },
     deletePost: (_, { input }) => {
-
       const { id } = input
       if (!database[id]) {
         throw new Error("no Post exists with id " + id);
