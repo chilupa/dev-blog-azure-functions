@@ -1,53 +1,72 @@
----
-page_type: sample
-languages:
-- javascript
-- typescript
-- nodejs
-name: "Azure Function GraphQL TypeScript Hello World"
-description: "A simple hello world example using GraphQL TypeScript using Apollo server."
-products:
-- azure
-- azure-functions
-- vs-code
----
+# Posts Server using Azure functions
 
-# GraphQL TypeScript Hello World
+This application uses Azure functions to implement GraphQL APIs.
 
-A simple hello world example using GraphQL TypeScript using Apollo server.
+## GraphQL playground
 
-## Getting Started
+https://posts-graphql.azurewebsites.net/api/posts
 
-### Installation and start function
+This application is deployed using [azure-functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) VS code extension.
 
-- `npm install && npm start`
+## Queries
 
-This quickstart works with `apollo-server-azure-functions` v2 only.
+Some of the useful GraphQL queries that have been consumed by the [dev-blog]() UI.
 
-### Quickstart using GraphQL Playground
+### Get all the posts
 
-1. Open browser to `http://localhost:7071/api/graphql`
-2. Enter query `{hello}`
+```js
+query GetPosts {
+  getPosts {
+    id
+    title
+    description
+    author
+    createdAt
+  }
+}
+```
 
-    ![](./media/graphql_playground.png)
+### Get a single post
 
-3. View response `{"data":{"hello":"Hello from GraphQL backend"}}`
+```js
+query GetSinglePost{
+  getPost(id:"2aa0b36f-c0d6-431e-87cf-e110684d0341"){
+     id
+    title
+    description
+    author
+    createdAt
+  }
+}
+```
 
-    For a more comprehensive example, open the browser's development tools (F12) and re-enter the query in the playground. 
+### Create a post
 
-### Quickstart using cURL
+```js
+mutation CreatePost {
+  createPost(
+    input: {
+      title: "React"
+      description: "JS Library"
+      createdAt: "Feb 17, 2022"
+      author: "John Snow"
+    }
+  ) {
+    id
+    title
+    description
+    createdAt
+    author
+  }
+}
+```
 
-1. Open bash terminal.
-2. Enter cURL command:
+### Delete a post
 
-    ```bash
-    curl 'http://localhost:7071/api/graphql' \
-        -H 'content-type: application/json' \
-        --data-raw '{"query":"{hello}"}' 
-    ```
-3. View response `{"data":{"hello":"Hello from GraphQL backend"}}`
-
-### Deploy to Azure
-
-1. In VS Code, create the Azure Function resource.
-2. Deploy the root folder to your resource. Do not select the `/dist` folder. It will be created as part of the build process.
+```js
+mutation DeletePost {
+  deletePost(id:"6f009c53-749e-45a5-a15e-73e0dbf84e35"){
+    title
+  }
+}
+```
